@@ -1,15 +1,17 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { routes } from "../routing/routes";
 
 export const useNavigation = () => {
   const router = useRouter();
 
   const viewState = router.query;
 
-  const goToDashboard = () => router.push("/");
+  const goToDashboard = () => router.push(routes.dashboard());
 
-  const goToNewEntry = () => router.push("/newEntry");
+  const goToNewEntry = () => router.push(routes.newEntry());
 
-  const goToEditEntry = (id) => router.push(`/editEntry/${id}`);
+  const goToEditEntry = (id) => router.push(routes.editEntry(id));
 
   return {
     viewState,

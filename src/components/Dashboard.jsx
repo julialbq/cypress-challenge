@@ -2,11 +2,9 @@ import { NewEntryButton } from "./NewEntryButton";
 import cx from "./Dashboard.module.scss";
 import { DashboardEntry } from "./DashboardEntry";
 import { isAfter } from "date-fns";
-import { useNavigation } from "../hooks/useNavigation";
 import { useEntries } from "../hooks/useEntries";
 
 export const Dashboard = () => {
-  const { goToNewEntry } = useNavigation();
   const { entries, deleteEntry } = useEntries();
   const sortedEntries = entries.sort((first, second) =>
     isAfter(second.date, first.date) ? -1 : 1
@@ -15,7 +13,7 @@ export const Dashboard = () => {
   return (
     <div>
       <div className={cx.newEntryButtonRow}>
-        <NewEntryButton onClick={goToNewEntry} />
+        <NewEntryButton />
       </div>
 
       <ul className={cx.entryList}>

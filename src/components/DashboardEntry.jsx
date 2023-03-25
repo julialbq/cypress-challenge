@@ -2,9 +2,11 @@ import cx from "./DashboardEntry.module.scss";
 import { Button } from "./Button";
 import { useTranslation } from "../hooks/useTranslation";
 import { useNavigation } from "../hooks/useNavigation";
+import Link from "next/link";
+import { routes } from "@/routing/routes";
 
 export const DashboardEntry = ({ entry, onDelete }) => {
-  const { goToEditEntry } = useNavigation();
+  const { renderEditEntryLink } = useNavigation();
 
   const { label, date, amount } = entry;
 
@@ -22,12 +24,9 @@ export const DashboardEntry = ({ entry, onDelete }) => {
         <span>$ {formatNumber(amount)}</span>
 
         <div className={cx.buttonContainer}>
-          <Button
-            className={cx.editButton}
-            onClick={() => goToEditEntry(entry.id)}
-          >
-            ✏️
-          </Button>
+          <Link href={routes.editEntry(entry.id)}>
+            <Button className={cx.editButton}>✏️</Button>
+          </Link>
 
           <Button className={cx.deleteButton} onClick={onDelete}>
             🗑️
