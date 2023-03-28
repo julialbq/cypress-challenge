@@ -8,7 +8,7 @@ export const NewEntryButton = ({ onClick }) => {
   const { t } = useTranslation();
 
   return (
-    <Link href={routes.newEntry()}>
+    <Link href={routes.newEntry()} data-testid="NewEntryButton">
       <Button className={cx.container} onClick={onClick}>
         ➕ {t("newEntryButton")}
       </Button>
