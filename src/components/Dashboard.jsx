@@ -12,10 +12,10 @@ export const Dashboard = () => {
 
   return (
     <div>
+      MWAAHAHAHAHAHAHAHAHAHA
       <div className={cx.newEntryButtonRow}>
         <NewEntryButton />
       </div>
-
       <ul className={cx.entryList}>
         {sortedEntries.map((entry) => (
           <DashboardEntry
