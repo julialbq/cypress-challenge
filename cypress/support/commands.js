@@ -34,3 +34,14 @@ Cypress.Commands.add(
   },
   (subject, testId) => subject.find(`[data-testid="${testId}"]`)
 );
+Cypress.Commands.add(
+  "FormEntries", () => {
+    cy.getByTestId("NewEntryButton").click();
+
+    cy.getByTestId("EntryFormLabelInput").type("Groceries");
+    cy.getByTestId("EntryFormAmountInput").type("100.23");
+    cy.getByTestId("EntryFormDateInput").type("2020-01-01");
+
+    cy.getByTestId("SaveButton").click();
+  }
+)
