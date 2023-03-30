@@ -1,21 +1,14 @@
-import { format, parse, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 describe("When creating entry", () => {
   it("Creates entry successfully", () => {
     cy.visit("http://localhost:3000/");
 
-    // Go to new entry page
-    cy.getByTestId("NewEntryButton").click();
-
-    // Fill out form
     const label = "Groceries";
     const amount = "100.23";
     const date = "2020-01-01";
-    cy.getByTestId("EntryFormLabelInput").type(label);
-    cy.getByTestId("EntryFormAmountInput").type(amount);
-    cy.getByTestId("EntryFormDateInput").type(date);
-
-    cy.getByTestId("SaveButton").click();
+    
+    cy.FormEntries();
 
     // Check that entry was created
     cy.getByTestId("DashboardEntry")
