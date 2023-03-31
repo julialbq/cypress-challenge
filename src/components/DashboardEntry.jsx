@@ -21,11 +21,11 @@ export const DashboardEntry = ({ entry, onDelete }) => {
         <span data-testid="DashboardEntryAmount">$ {formatNumber(amount)}</span>
 
         <div className={cx.buttonContainer}>
-          <Link href={routes.editEntry(entry.id)}>
+          <Link href={routes.editEntry(entry.id)} data-testid="EditEntryButton">
             <Button className={cx.editButton}>✏️</Button>
           </Link>
 
-          <Button className={cx.deleteButton} onClick={onDelete}>
+          <Button className={cx.deleteButton} onClick={onDelete} data-testid="DeleteEntryButton">
             🗑️
           </Button>
         </div>
