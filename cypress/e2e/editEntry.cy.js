@@ -49,21 +49,32 @@ describe("When editing entry", () => {
       .should("have.text", format(parseISO(date, "yyyy-MM-dd"), "M/d/yyyy"));
   });
 
-  it.only("allows user to return to dashboard without editing", () => {
+  it("allows user to return to dashboard without editing", () => {
     cy.visit("http://localhost:3000/");
 
     cy.FormEntries();
 
     cy.getByTestId("EditEntryButton").click();
 
-    cy.getByTestId("EntryFormLabelInput")
-    .type("{selectall}{backspace}")
+    cy.getByTestId("EntryFormLabelInput").type("{selectall}{backspace}");
 
     cy.get("body").trigger("keydown", { key: "Escape" });
 
     cy.getByTestId("DashboardEntries").should("have.length", 1);
     cy.getByTestId("DashboardEntry")
-    .findByTestId("DashboardEntryLabel")
-    .should("have.text", "Groceries");
-  })
+      .findByTestId("DashboardEntryLabel")
+      .should("have.text", "Groceries");
+  });
+
+  it("shows notification to inform entry edition", () => {
+    cy.visit("http://localhost:3000/");
+
+    cy.FormEntries();
+
+    cy.EditFormEntries();
+
+    cy.getByTestId("SaveButton").click();
+
+    cy.getByTestId("Notification").contains("Entry edited!");
+  });
 });
