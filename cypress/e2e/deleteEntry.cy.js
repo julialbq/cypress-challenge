@@ -9,13 +9,14 @@ describe("When deleting entry", () => {
     cy.getByTestId("DashboardEntries").should("be.empty");
   });
 
-  it("Deletes entry successfully by keyboard shortcut", () => {
+  it.only("Deletes entry successfully by keyboard shortcut", () => {
     cy.visit("http://localhost:3000/");
 
     cy.FormEntries();
-    cy.wait(1)
 
-    cy.get("body").type("{del}");
+    cy.EditFormEntries();
+
+    cy.get("body").trigger("keydown", { key: "Delete" });
 
     cy.getByTestId("DashboardEntries").should("be.empty");
   });
