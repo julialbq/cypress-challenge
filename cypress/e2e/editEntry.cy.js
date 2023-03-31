@@ -3,56 +3,67 @@ const { parseISO, format } = require("date-fns");
 describe("When editing entry", () => {
   it("edits entry successfully", () => {
     cy.visit("http://localhost:3000/");
+    const label = "Groceries";
+    const amount = "100.23";
+    const date = "2020-01-01";
 
-    cy.FormEntries();
+    cy.FormEntries(label, amount, date);
 
-    const label = "Cat food";
-    const amount = "50.90";
-    const date = "2022-02-02";
+    const labelEdited = "Cat food";
+    const amountEdited = "50.90";
+    const dateEdited = "2022-02-02";
 
-    cy.EditFormEntries();
+    cy.EditFormEntries(labelEdited, amountEdited, dateEdited);
 
     cy.getByTestId("SaveButton").click();
 
     cy.getByTestId("DashboardEntry")
       .findByTestId("DashboardEntryLabel")
-      .should("have.text", label);
+      .should("have.text", labelEdited);
     cy.getByTestId("DashboardEntry")
       .findByTestId("DashboardEntryAmount")
-      .should("contain.text", amount);
+      .should("contain.text", amountEdited);
     cy.getByTestId("DashboardEntry")
       .findByTestId("DashboardEntryDate")
-      .should("have.text", format(parseISO(date, "yyyy-MM-dd"), "M/d/yyyy"));
+      .should("have.text", format(parseISO(dateEdited, "yyyy-MM-dd"), "M/d/yyyy"));
   });
 
   it("sends edited entry successfully by keyboard shortcut", () => {
     cy.visit("http://localhost:3000/");
 
-    cy.FormEntries();
+    const label = "Groceries";
+    const amount = "100.23";
+    const date = "2020-01-01";
 
-    const label = "Cat food";
-    const amount = "50.90";
-    const date = "2022-02-02";
+    cy.FormEntries(label, amount, date);
 
-    cy.EditFormEntries();
+    const labelEdited = "Cat food";
+    const amountEdited = "50.90";
+    const dateEdited = "2022-02-02";
+
+    cy.EditFormEntries(labelEdited, amountEdited, dateEdited);
 
     cy.get("body").trigger("keydown", { key: "Enter" });
 
     cy.getByTestId("DashboardEntry")
       .findByTestId("DashboardEntryLabel")
-      .should("have.text", label);
+      .should("have.text", labelEdited);
     cy.getByTestId("DashboardEntry")
       .findByTestId("DashboardEntryAmount")
-      .should("contain.text", amount);
+      .should("contain.text", amountEdited);
     cy.getByTestId("DashboardEntry")
       .findByTestId("DashboardEntryDate")
-      .should("have.text", format(parseISO(date, "yyyy-MM-dd"), "M/d/yyyy"));
+      .should("have.text", format(parseISO(dateEdited, "yyyy-MM-dd"), "M/d/yyyy"));
   });
 
   it("allows user to return to dashboard without editing", () => {
     cy.visit("http://localhost:3000/");
 
-    cy.FormEntries();
+    const label = "Groceries";
+    const amount = "100.23";
+    const date = "2020-01-01";
+
+    cy.FormEntries(label, amount, date);
 
     cy.getByTestId("EditEntryButton").click();
 
