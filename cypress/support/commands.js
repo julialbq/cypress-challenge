@@ -34,23 +34,23 @@ Cypress.Commands.add(
   },
   (subject, testId) => subject.find(`[data-testid="${testId}"]`)
 );
-Cypress.Commands.add("FormEntries", () => {
+Cypress.Commands.add("FormEntries", (label, amount, date) => {
   cy.getByTestId("NewEntryButton").click();
 
-  cy.getByTestId("EntryFormLabelInput").type("Groceries");
-  cy.getByTestId("EntryFormAmountInput").type("100.23");
-  cy.getByTestId("EntryFormDateInput").type("2020-01-01");
+  cy.getByTestId("EntryFormLabelInput").type(label);
+  cy.getByTestId("EntryFormAmountInput").type(amount);
+  cy.getByTestId("EntryFormDateInput").type(date);
 
   cy.getByTestId("SaveButton").click();
 });
-Cypress.Commands.add("EditFormEntries", () => {
+Cypress.Commands.add("EditFormEntries", (label, amount, date) => {
   cy.getByTestId("EditEntryButton").click();
   
   cy.getByTestId("EntryFormLabelInput")
     .type("{selectall}{backspace}")
-    .type("Cat food");
+    .type(label);
   cy.getByTestId("EntryFormAmountInput")
     .type("{selectall}{backspace}")
-    .type("50.90");
-  cy.getByTestId("EntryFormDateInput").type("2022-02-02");
+    .type(amount);
+  cy.getByTestId("EntryFormDateInput").type(date);
 });
