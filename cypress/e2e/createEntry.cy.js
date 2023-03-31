@@ -7,7 +7,7 @@ describe("When creating entry", () => {
     const label = "Groceries";
     const amount = "100.23";
     const date = "2020-01-01";
-    
+
     cy.FormEntries();
 
     // Check that entry was created
@@ -20,5 +20,12 @@ describe("When creating entry", () => {
     cy.getByTestId("DashboardEntry")
       .findByTestId("DashboardEntryDate")
       .should("have.text", format(parseISO(date, "yyyy-MM-dd"), "M/d/yyyy"));
+  });
+  it("shows notification to inform entry creation", () => {
+    cy.visit("http://localhost:3000/");
+
+    cy.FormEntries();
+
+    cy.getByTestId("Notification").contains("Entry created!");
   });
 });
